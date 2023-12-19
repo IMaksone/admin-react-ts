@@ -1,4 +1,4 @@
-.form-input {
+.formInput {
   display: flex;
   width: calc(100% - 14px);
 
@@ -9,12 +9,12 @@
   background-color: #E9EFF7;
 }
 
-.form-label {
+.formLabel {
   width: 100%;
   margin-bottom: 10px;
 }
 
-.div-wrapper {
+.divWrapper {
   display: flex;
   margin: 0 auto;
   justify-content: center;
@@ -35,7 +35,7 @@
 }
 
 
-.form-select {
+.formSelect {
   width: 100%;
   padding: 5px;
   
@@ -43,7 +43,7 @@
   background-color: #E9EFF7;
 }
 
-.form-area {
+.formArea {
   width: calc(100% - 14px);
   max-width: calc(100% - 14px);
   padding: 7px;
@@ -51,7 +51,7 @@
   background-color: #E9EFF7;
 }
 
-.form-btn {
+.formBtn {
   width: 100%;
   padding: 10px;
   margin: 5px 0px;
@@ -63,7 +63,7 @@
   box-shadow: 0px 3px 0px 0px #E47E5A;
 }
 
-.form-error {
+.formError {
   text-align: center;
       
   margin: 0px 15px 30px 15px;

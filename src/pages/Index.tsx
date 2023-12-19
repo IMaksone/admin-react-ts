@@ -1,13 +1,13 @@
 import { useState } from "react";
-import '../styles/form.css'
+import styles from '../styles/form.module.css'
 
   const data = {
-  firstName: "",
-  lastName: "",
-  phone: "",
-  email: "", 
-  gender: "",
-  message: "",
+    firstName: "",
+    lastName: "",
+    phone: "",
+    email: "", 
+    gender: "",
+    message: "",
 };
 
 export const Index = () => {
@@ -58,12 +58,12 @@ export const Index = () => {
   document.body.style.backgroundColor = "#FF9D70";
 
   return (
-    <div className="div-wrapper">
-      <form className="form"
+    <div className={styles.divWrapper}>
+      <form className={styles.form}
         onSubmit={handleSubmit}>
-        <label className='form-label' htmlFor="firstName">
+        <label className={styles.formLabel} htmlFor="firstName">
           First Name:
-          <input className="form-input"
+          <input className={styles.formInput}
             required
             type="text"
             id="firstName"
@@ -71,18 +71,18 @@ export const Index = () => {
             onChange={handleChange}
           ></input>
         </label>
-        <label className='form-label' htmlFor="lastName">
+        <label className={styles.formLabel} htmlFor="lastName">
           Last Name:
-          <input className="form-input"
+          <input className={styles.formInput}
             type="text"
             id="lastName"
             value={formData.lastName}
             onChange={handleChange}
           ></input>
         </label>
-        <label className='form-label' htmlFor="phone">
+        <label className={styles.formLabel} htmlFor="phone">
           Phone:
-          <input className="form-input"
+          <input className={styles.formInput}
             required
             placeholder="+375ххххххххх"
             type="tel"
@@ -91,9 +91,9 @@ export const Index = () => {
             onChange={handleChange}
           ></input>
         </label>
-        <label className='form-label' htmlFor="email">
+        <label className={styles.formLabel} htmlFor="email">
           Email:
-          <input className="form-input"
+          <input className={styles.formInput}
             required
             type="email"
             id="email"
@@ -101,10 +101,10 @@ export const Index = () => {
             onChange={handleChange}
           ></input>
         </label>
-        <label className='form-label' htmlFor="gender">
+        <label className={styles.formLabel} htmlFor="gender">
           {" "}
           Gender:
-          <select className="form-select"
+          <select className={styles.formSelect}
             id="gender"
             value={formData.gender}
             onChange={handleChange}
@@ -113,22 +113,22 @@ export const Index = () => {
             <option>Women</option>
           </select>
         </label>
-        <label className='form-label' htmlFor="message">
+        <label className={styles.formLabel} htmlFor="message">
           Comment:
-          <textarea className="form-area"
+          <textarea className={styles.formArea}
             id="message"
             value={formData.message}
             onChange={handleChange}
           ></textarea>
         </label>
-        <button className="form-btn"
+        <button className={styles.formBtn}
           type="submit"
         >
           Отправить
         </button>
       </form>
       {dataError && (
-        <div className="form-error">
+        <div className={styles.formError}>
           {dataError}
         </div>
       )}
