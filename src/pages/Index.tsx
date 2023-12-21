@@ -2,27 +2,26 @@ import { useEffect, useState } from "react";
 
 export const Index = () => {
   const [apiCount, setApiCount] = useState<any>({});
-  const [apiError, setApiError] = useState<string | null>(null);
+  const [apiError, setApiError] = useState<any>(null);
 
   useEffect(() => {
-    fetch(`http://www.boredapi.com/api/activity`)
-    .then((response) => {
-        return response.json();
-    })
-    .then((data) => {
-      if (data.activity) {
+    (async () => {
+      try {
+        const response = await fetch(`http://www.boredapi.com/api/activity`);
+        const data = await response.json();
         setApiCount(data);
         setApiError(null);
-      } else {
-        setApiError('Ошибка! Неверный путь')
+      } catch (error) {
+        console.error("Ошибка:", error);
+        setApiError(`Ошибка: ${error}`);
       }
-    })
+    })();
+    
   }, [setApiCount]);
-  return (
-    <div>
-      {apiError && <div>{apiError}</div>}
-      {apiCount.activity && <div>{apiCount.activity}</div>}
-    </div>
+  return (<div>
+    {apiCount.activity && <div>{apiCount.activity}</div>}
+    {apiError && <div>{apiError}</div>}
+  </div>
   )
 }
 
