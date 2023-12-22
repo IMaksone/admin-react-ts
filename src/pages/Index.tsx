@@ -1,28 +1,25 @@
 import { useEffect, useState } from "react";
 
 export const Index = () => {
-  const [apiCount, setApiCount] = useState<any>({});
-  const [apiError, setApiError] = useState<any>(null);
+  const [divArr, setDivArr] = useState<any>([]);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const response = await fetch(`http://www.boredapi.com/api/activity`);
-        const data = await response.json();
-        setApiCount(data);
-        setApiError(null);
-      } catch (error) {
-        console.error("Ошибка:", error);
-        setApiError(`Ошибка: ${error}`);
-      }
-    })();
-    
-  }, [setApiCount]);
-  return (<div>
-    {apiCount.activity && <div>{apiCount.activity}</div>}
-    {apiError && <div>{apiError}</div>}
-  </div>
+  const clickBtn = () => {
+    const divEl = 1;
+    const newArr = [...divArr, divEl];
+    setDivArr(newArr);
+  } 
+
+  return (
+    <div>
+      <button onClick={clickBtn}>Кнопка</button>
+      <div>{divArr.map((el: any, i: number) => <div key={i}></div>)}</div>
+    </div>
   )
 }
 
+//Создать два стэйта один из них счетчик, второй тоже счетчик будет добавляться 1 когда в первом стайте будет четное число. 
+//Второй стейт меня черeз useEffect();
+//Вместе со вторым стейтом первый стейт обнуляется
+
 export default Index;
+
