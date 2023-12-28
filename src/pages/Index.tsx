@@ -1,25 +1,48 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+
+const useCounters = () => {
+  const [firstCounter, setFirstCounter] = useState<number>(0);
+  const [secondCounter, setSecondCounter] = useState<number>(0);
+
+    const thirdCounter = useMemo(() => {
+      return firstCounter + secondCounter;
+    }, [firstCounter, secondCounter]);
+  
+  useEffect(() => {
+    if (firstCounter > 0 && firstCounter % 2 === 0) {
+      setSecondCounter(secondCounter + 1);
+      setFirstCounter(0);
+    }
+    if (thirdCounter === 5) {
+      setFirstCounter(0);
+      setSecondCounter(0);
+    }
+  }, [firstCounter, secondCounter, thirdCounter]);
+  return {
+    firstCounter,
+    secondCounter,
+    thirdCounter,
+    setCounter : () => {
+      setFirstCounter(firstCounter + 1);
+    }
+  }
+}
 
 export const Index = () => {
-  const [divArr, setDivArr] = useState<any>([]);
 
-  const clickBtn = () => {
-    const divEl = 1;
-    const newArr = [...divArr, divEl];
-    setDivArr(newArr);
-  } 
+  const {firstCounter, secondCounter, thirdCounter, setCounter} = useCounters();
 
   return (
     <div>
-      <button onClick={clickBtn}>Кнопка</button>
-      <div>{divArr.map((el: any, i: number) => <div key={i}></div>)}</div>
+      <button onClick={() => setCounter()}>Клик</button>
+      <div>First counter {firstCounter}</div>
+      <div>Second counter {secondCounter}</div>
+      <div>Third counter {thirdCounter}</div>
     </div>
   )
 }
 
-//Создать два стэйта один из них счетчик, второй тоже счетчик будет добавляться 1 когда в первом стайте будет четное число. 
-//Второй стейт меня черeз useEffect();
-//Вместе со вторым стейтом первый стейт обнуляется
-
 export default Index;
 
+
+//Единственный хук для счетчиков, который возвращает сетер для счетчиков и значения счетчиков.
