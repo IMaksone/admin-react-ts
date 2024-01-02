@@ -1,48 +1,19 @@
-import { useEffect, useMemo, useState } from "react";
-
-const useCounters = () => {
-  const [firstCounter, setFirstCounter] = useState<number>(0);
-  const [secondCounter, setSecondCounter] = useState<number>(0);
-
-    const thirdCounter = useMemo(() => {
-      return firstCounter + secondCounter;
-    }, [firstCounter, secondCounter]);
-  
-  useEffect(() => {
-    if (firstCounter > 0 && firstCounter % 2 === 0) {
-      setSecondCounter(secondCounter + 1);
-      setFirstCounter(0);
-    }
-    if (thirdCounter === 5) {
-      setFirstCounter(0);
-      setSecondCounter(0);
-    }
-  }, [firstCounter, secondCounter, thirdCounter]);
-  return {
-    firstCounter,
-    secondCounter,
-    thirdCounter,
-    setCounter : () => {
-      setFirstCounter(firstCounter + 1);
-    }
-  }
-}
+import { useState } from "react";
+import SearchIssuance from "./SearchIssuance";
 
 export const Index = () => {
+  const [inputCount, setInputCount] = useState('');
 
-  const {firstCounter, secondCounter, thirdCounter, setCounter} = useCounters();
+  const inputEvent = (event : any) => {
+    setInputCount(event.target.value);
+  }
 
   return (
-    <div>
-      <button onClick={() => setCounter()}>Клик</button>
-      <div>First counter {firstCounter}</div>
-      <div>Second counter {secondCounter}</div>
-      <div>Third counter {thirdCounter}</div>
-    </div>
+    <>
+      <input onChange={inputEvent} value={inputCount}></input>
+      <SearchIssuance issuance={inputCount}></SearchIssuance>
+    </>
   )
 }
 
 export default Index;
-
-
-//Единственный хук для счетчиков, который возвращает сетер для счетчиков и значения счетчиков.
