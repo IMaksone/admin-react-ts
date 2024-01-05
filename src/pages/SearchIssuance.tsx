@@ -1,20 +1,20 @@
 import { AnyRecord } from "dns";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const searchRequests = ['Какой-то', 'смачный', 'текст', 'для', 'проверки'];
 
-export const SearchIssuance = ({issuance, onClickChange} : any) => {
+export const SearchIssuance = ({issuance, onClickCheck} : any) => {
   const [issuanceArr, setIssuanceArr] = useState(searchRequests);
 
   useEffect(() => {  
-    let newRequests : string[] = [];
-
-    searchRequests.forEach((el) => {
-      if (el.includes(issuance)) {
-        newRequests.push(el);
-      }
+    let newRequests = searchRequests.filter((el) => {
+      return el.includes(issuance);
+    })
+    if (newRequests[0] === issuance) {
+      newRequests = [];
+    }
     setIssuanceArr(newRequests);
-  })}, [issuance])
+  }, [issuance])
 
   const styles = {
       width: '200px',
@@ -22,12 +22,10 @@ export const SearchIssuance = ({issuance, onClickChange} : any) => {
       border: 'solid 1px',
   }
 
-  const clickedName  = (event : any) => {
-    console.log(event.target.value);
+  const clickedName  = (event: any) => {
+    onClickCheck(event.target.innerHTML);
   }
-  
-
-
+ 
   const listItems = 
     issuanceArr.map((el : any, i) =>
         <div 
@@ -38,7 +36,12 @@ export const SearchIssuance = ({issuance, onClickChange} : any) => {
   );
 
   return (
-      <div>{listItems}</div>
+      <div
+        style={{
+          width: '100px',
+          height: '100xp'
+        }}
+      >{listItems}</div>
   )
 }
 
