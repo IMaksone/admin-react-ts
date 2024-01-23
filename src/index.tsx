@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 
 import Router from './router';
 
+import 'normalize.css';
 import './styles/global.scss';
 
 const root = ReactDOM.createRoot(
@@ -14,4 +15,3 @@ root.render(
     <Router />
   </React.StrictMode>
 );
-
