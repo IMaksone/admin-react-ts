@@ -1,9 +1,5 @@
 export const Index = () => {
-  return (
-    <>
-      index
-    </>
-  );
+  return <>index</>;
 };
 
 export default Index;
